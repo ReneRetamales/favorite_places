@@ -6,11 +6,12 @@ Una aplicación móvil multiplataforma desarrollada con **Flutter** para gestion
 
 - ✅ Agregar nuevos lugares favoritos
 - ✅ Visualizar lista de lugares
-- 📸 Soporte para imágenes (en desarrollo)
-- 🎨 Interfaz moderna con tema oscuro
+- ✅ Tomar fotos con la cámara para lugares
+- ✅ Interfaz moderna con tema oscuro
 - 📱 Compatible con Android, iOS, Web, Windows, macOS y Linux
-- ⚡ State management con Riverpod
+- ⚡ State management con Riverpod v2+
 - 🎯 Tipografía personalizada con Google Fonts
+- 📁 Almacenamiento local persistente (planificado)
 
 ## 📋 Requisitos Previos
 
@@ -74,7 +75,8 @@ lib/
 
 ## 📦 Dependencias Principales
 
-- **flutter_riverpod** (^3.2.1): Gestión de estado reactiva
+- **flutter_riverpod** (^3.2.1): Gestión de estado reactiva (Riverpod v2+)
+- **image_picker** (^1.2.1): Selector de imágenes y acceso a cámara
 - **google_fonts** (^7.0.0): Tipografía personalizada
 - **uuid** (^4.5.3): Generación de IDs únicos
 - **cupertino_icons** (^1.0.8): Iconos estilo iOS
@@ -87,7 +89,9 @@ Define las estructuras de datos de la aplicación, como el modelo `Place`.
 
 ### Providers (`providers/`)
 
-Contiene la lógica de negocio y gestión de estado con Riverpod. `UserPlacesNotifier` gestiona la lista de lugares.
+Contiene la lógica de negocio y gestión de estado con Riverpod v2+. `UserPlacesNotifier` (basado en `Notifier`) gestiona la lista de lugares de forma reactiva.
+
+**Nota:** El proyecto usa la sintaxis moderna de Riverpod v2+ con `Notifier` en lugar de la antigua `StateNotifier`.
 
 ### Screens (`screens/`)
 
@@ -96,6 +100,19 @@ Pantallas principales de la aplicación que construyen la UI.
 ### Widgets (`widgets/`)
 
 Componentes reutilizables en diferentes pantallas.
+
+## 🔐 Permisos Requeridos
+
+### Android
+- `CAMERA`: Para acceder a la cámara del dispositivo
+
+### iOS
+- `NSCameraUsageDescription`: Para acceder a la cámara
+- `NSPhotoLibraryUsageDescription`: Para acceder a la galería de fotos
+
+Los permisos están configurados automáticamente en los archivos de configuración:
+- Android: `android/app/src/main/AndroidManifest.xml`
+- iOS: `ios/Runner/Info.plist`
 
 ## 🎨 Tema y Estilos
 
@@ -117,6 +134,8 @@ La aplicación usa un tema oscuro personalizado con:
 
 Si encuentras problemas:
 
+### Problemas Generales
+
 1. **Limpiar cache**:
 
    ```bash
@@ -134,6 +153,22 @@ Si encuentras problemas:
    ```bash
    flutter --version
    ```
+
+### Problemas con la Cámara
+
+**Android:**
+- Asegúrate de que el permiso de cámara está habilitado en `AndroidManifest.xml`
+- Ve a Configuración > Aplicaciones > Favorite Places > Permisos > Cámara y habilítalo
+- En Android 6.0+ (Marshmallow), los permisos se solicitan en tiempo de ejecución
+
+**iOS:**
+- Verifica que la descripción de uso de cámara está en `Info.plist`
+- Concede permisos cuando la app los solicite
+
+### Problemas de Compilación
+
+- **Error de Riverpod**: Asegúrate de usar Riverpod v2+ (`NotifierProvider`, no `StateNotifierProvider`)
+- **Error de image_picker**: Ejecuta `flutter pub get` después de agregar la dependencia
 
 ## 📚 Recursos Útiles
 
