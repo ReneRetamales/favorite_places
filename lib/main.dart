@@ -1,3 +1,12 @@
+// Comentario:
+// En el curso de flutter quedé en la parte de la implementación del mapa de Google.
+// Personalmente ya se hacer esto y debido a que no tengo créditos disponibles para usar la API de Google Maps,
+// decidí no implementar esta parte y dejarla para el futuro.
+// De todas formas, el resto de la aplicación está completamente funcional y se pueden agregar lugares con su
+// respectiva imagen y ubicación (aunque esta última no se muestra en ningún lado).
+// En el futuro, cuando tenga créditos disponibles, planeo implementar la parte del mapa
+// para mostrar la ubicación de los lugares agregados.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
